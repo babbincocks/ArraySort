@@ -36,12 +36,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSearchMatches = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(553, 211);
+            this.btnSearch.Location = new System.Drawing.Point(553, 324);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(92, 28);
             this.btnSearch.TabIndex = 0;
@@ -59,14 +60,14 @@
             // 
             // txtNameSearch
             // 
-            this.txtNameSearch.Location = new System.Drawing.Point(382, 211);
+            this.txtNameSearch.Location = new System.Drawing.Point(382, 324);
             this.txtNameSearch.Name = "txtNameSearch";
             this.txtNameSearch.Size = new System.Drawing.Size(154, 20);
             this.txtNameSearch.TabIndex = 2;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(379, 180);
+            this.label1.Location = new System.Drawing.Point(379, 293);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 31);
             this.label1.TabIndex = 3;
@@ -105,11 +106,20 @@
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
+            // lbSearchMatches
+            // 
+            this.lbSearchMatches.FormattingEnabled = true;
+            this.lbSearchMatches.Location = new System.Drawing.Point(359, 141);
+            this.lbSearchMatches.Name = "lbSearchMatches";
+            this.lbSearchMatches.Size = new System.Drawing.Size(285, 134);
+            this.lbSearchMatches.TabIndex = 7;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 377);
+            this.Controls.Add(this.lbSearchMatches);
             this.Controls.Add(this.lbTimeRecords);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNameSearch);
@@ -137,6 +147,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbSearchMatches;
     }
 }
 

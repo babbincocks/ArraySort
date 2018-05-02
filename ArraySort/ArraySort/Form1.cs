@@ -54,7 +54,38 @@ namespace ArraySort
                 else
                 {
                     string searchTerm = txtNameSearch.Text;
+                    int min = 0; 
+                    int middle;
+                    int max = splitNames.Length - 1;
+                    bool match = false;
+                    int location = -1;
+                    string[] matches;
+                    if (searchTerm.Length > 1)
+                    {
+                        while (min <= max)
+                        {
+                            middle = (min + max) / 2;
 
+                            if (String.Compare(splitNames[middle].ToString(), searchTerm, true) == 0)
+                            {
+                                match = true;
+                                location = middle;
+                            }
+                            else if (String.Compare(splitNames[middle].ToString(), searchTerm, true) > 0)
+                            {
+                                max = middle - 1;
+                            }
+                            else if (String.Compare(splitNames[middle].ToString(), searchTerm, true) < 0)
+                            {
+                                min = middle + 1;
+                            }
+
+                        }
+                    }
+                    else if (searchTerm.Length == 1)
+                    {
+
+                    }
 
                 }
             }
