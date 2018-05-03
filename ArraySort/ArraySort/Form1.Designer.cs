@@ -37,6 +37,9 @@
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSearchMatches = new System.Windows.Forms.ListBox();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchMatchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timeRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +88,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sortToolStripMenuItem,
-            this.exportToolStripMenuItem});
+            this.exportToolStripMenuItem,
+            this.clearToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(669, 24);
@@ -113,6 +117,29 @@
             this.lbSearchMatches.Name = "lbSearchMatches";
             this.lbSearchMatches.Size = new System.Drawing.Size(285, 134);
             this.lbSearchMatches.TabIndex = 7;
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchMatchesToolStripMenuItem,
+            this.timeRecordsToolStripMenuItem});
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.clearToolStripMenuItem.Text = "Clear";
+            // 
+            // searchMatchesToolStripMenuItem
+            // 
+            this.searchMatchesToolStripMenuItem.Name = "searchMatchesToolStripMenuItem";
+            this.searchMatchesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.searchMatchesToolStripMenuItem.Text = "...Search Matches";
+            this.searchMatchesToolStripMenuItem.Click += new System.EventHandler(this.searchMatchesToolStripMenuItem_Click);
+            // 
+            // timeRecordsToolStripMenuItem
+            // 
+            this.timeRecordsToolStripMenuItem.Name = "timeRecordsToolStripMenuItem";
+            this.timeRecordsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.timeRecordsToolStripMenuItem.Text = "...Time Records";
+            this.timeRecordsToolStripMenuItem.Click += new System.EventHandler(this.timeRecordsToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -148,6 +175,9 @@
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ListBox lbSearchMatches;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchMatchesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timeRecordsToolStripMenuItem;
     }
 }
 

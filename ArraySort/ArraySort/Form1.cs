@@ -30,7 +30,7 @@ namespace ArraySort
             {
                 names[index] = source.ReadLine().ToString();
                 string[] nameSplit = names[index].Split(',');
-                splitNames[index] = new PersonName(nameSplit[0].ToString(), nameSplit[1].ToString());
+                splitNames[index] = new PersonName(nameSplit[0], nameSplit[1].TrimStart(' '));
 
                 lbNameList.Items.Add(splitNames[index]);
                 index++;
@@ -53,39 +53,170 @@ namespace ArraySort
                 }
                 else
                 {
+                    DateTime timeStart = DateTime.Now;
+
                     string searchTerm = txtNameSearch.Text;
                     int min = 0; 
                     int middle;
                     int max = splitNames.Length - 1;
                     bool match = false;
                     int location = -1;
-                    string[] matches;
-                    if (searchTerm.Length > 1)
+                    List<string> matches = new List<string> { };
+
+
+                    if (searchTerm.EndsWith(" "))
                     {
-                        while (min <= max)
+                        searchTerm.TrimEnd(' ');
+                    }
+
+                    if (searchTerm.EndsWith(","))
+                    {
+                        searchTerm.TrimEnd(',');
+                    }
+
+
+                    if (searchTerm.Length > 1 && searchTerm.Contains(" ") && !searchTerm.Contains(","))
+                    {
+
+                        string[] nameSplit = searchTerm.Split(' ');
+                        PersonName search = new PersonName(nameSplit[1], nameSplit[0]); 
+
+                        while (min <= max && !match)
                         {
                             middle = (min + max) / 2;
 
-                            if (String.Compare(splitNames[middle].ToString(), searchTerm, true) == 0)
+                            if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) == 0)
                             {
                                 match = true;
                                 location = middle;
+                                lbSearchMatches.Items.Add("The name " + splitNames[location].ToString(2) + " was found on line " + (location + 1) + ".");
+                                DateTime timeEnd = DateTime.Now;
+                                TimeSpan totalTime = timeEnd - timeStart;
+                                string time = "Searching for this name took " + totalTime.Milliseconds + " milliseconds.";
+                                lbTimeRecords.Items.Add(time);
                             }
-                            else if (String.Compare(splitNames[middle].ToString(), searchTerm, true) > 0)
+                            else if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) > 0)
                             {
                                 max = middle - 1;
                             }
-                            else if (String.Compare(splitNames[middle].ToString(), searchTerm, true) < 0)
+                            else if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) < 0)
                             {
                                 min = middle + 1;
                             }
 
                         }
                     }
+                    else if (searchTerm.Length > 1 && searchTerm.Contains(" ") && searchTerm.Contains(","))
+                    {
+                        string[] nameSplit = searchTerm.Split(',');
+                        PersonName search = new PersonName(nameSplit[0], nameSplit[1].TrimStart(' '));
+                        while (min <= max && !match)
+                        {
+                            middle = (min + max) / 2;
+
+                            if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) == 0)
+                            {
+                                match = true;
+                                location = middle;
+                                lbSearchMatches.Items.Add("The name " + splitNames[location].ToString(2) + " was found on line " + (location + 1) + ".");
+                                DateTime timeEnd = DateTime.Now;
+                                TimeSpan totalTime = timeEnd - timeStart;
+                                string time = "Searching for this name took " + totalTime.Milliseconds + " milliseconds.";
+                                lbTimeRecords.Items.Add(time);
+                            }
+
+                            else if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) > 0)
+                            {
+                                max = middle - 1;
+                            }
+                            else if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) < 0)
+                            {
+                                min = middle + 1;
+                            }
+
+                        }
+                    }
+
+                    else if (searchTerm.Length > 1 && !searchTerm.Contains(" ") && !searchTerm.Contains(","))
+                    {
+                        int matchIndex;
+                        string minValue;
+
+                        for (int start = 0; start < splitNames.Length - 1; start++)
+                        {
+
+                            matchIndex = start;
+                            minValue = splitNames[start].ToString();
+
+
+
+                                if (String.Compare(splitNames[index].ToString(0), minValue.ToString(), true) == 0)
+                                {
+                                    match = true;
+
+                                    lbSearchMatches.Items.Add("The name " + splitNames[index].ToString(2) + " was found on line " + (index + 1) + ".");
+                                    DateTime timeEnd = DateTime.Now;
+                                    TimeSpan totalTime = timeEnd - timeStart;
+                                    string time = "Searching for this name took " + totalTime.Milliseconds + " milliseconds.";
+                                    lbTimeRecords.Items.Add(time);
+
+                                }
+                                else if (String.Compare(minValue.ToString(), splitNames[index].ToString(0), true) == 0)
+                                {
+                                    minValue = splitNames[index].ToString();
+                                    matchIndex = index;
+                                }
+
+                            }
+
+                            
+
+
+
+                        
+                    }
+
                     else if (searchTerm.Length == 1)
                     {
+                        
 
+                        while (min <= max && !match)
+                        {
+                            middle = (min + max) / 2;
+
+                            if (splitNames[middle].ToString(0).StartsWith(searchTerm) || splitNames[middle].ToString(1).StartsWith(searchTerm))
+                            {
+                                location = middle;
+                                
+                                lbSearchMatches.Items.Add("The name " + splitNames[location].ToString(2) + " was found on line " + (location + 1) + ".");
+                                match = true;
+                            }
+                            else if (string.Compare(splitNames[middle].ToString(0).Substring(0,1), searchTerm.ToString(), true) > 0)
+                            {
+                                max = middle - 1;
+                            }
+                            else if (string.Compare(splitNames[middle].ToString(0).Substring(0, 1), searchTerm.ToString(), true) < 0)
+                            {
+                                min = middle + 1;
+                            }
+                            else if (string.Compare(splitNames[middle].ToString(1).Substring(0, 1), searchTerm.ToString(), true) > 0)
+                            {
+                                max = middle - 1;
+                            }
+                            else if (string.Compare(splitNames[middle].ToString(1).Substring(0, 1), searchTerm.ToString(), true) < 0)
+                            {
+                                min = middle + 1;
+                            }
+
+                        }
+
+                        }
+
+                    if (location == -1)
+                    {
+                        throw new Exception("Unable to find the search term in the list of names.");
                     }
+
 
                 }
             }
@@ -187,7 +318,7 @@ namespace ArraySort
 
             public override string ToString()
             {
-                return last + "," + first;
+                return last + ", " + first;
             }
 
             public string ToString(int which)
@@ -202,8 +333,9 @@ namespace ArraySort
                 }
                 else
                 {
-                    return last + "," + first;
+                    return first + ' ' + last;
                 }
+            
             }
 
         }
@@ -240,6 +372,16 @@ namespace ArraySort
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void searchMatchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbSearchMatches.Items.Clear();
+        }
+
+        private void timeRecordsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbTimeRecords.Items.Clear();
         }
     }
 }
