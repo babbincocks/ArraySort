@@ -36,10 +36,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbSearchMatches = new System.Windows.Forms.ListBox();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchMatchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSearchMatches = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,7 @@
             this.lbNameList.FormattingEnabled = true;
             this.lbNameList.Location = new System.Drawing.Point(17, 36);
             this.lbNameList.Name = "lbNameList";
+            this.lbNameList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbNameList.Size = new System.Drawing.Size(317, 316);
             this.lbNameList.TabIndex = 1;
             // 
@@ -110,14 +111,6 @@
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
-            // lbSearchMatches
-            // 
-            this.lbSearchMatches.FormattingEnabled = true;
-            this.lbSearchMatches.Location = new System.Drawing.Point(359, 141);
-            this.lbSearchMatches.Name = "lbSearchMatches";
-            this.lbSearchMatches.Size = new System.Drawing.Size(285, 134);
-            this.lbSearchMatches.TabIndex = 7;
-            // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -140,6 +133,14 @@
             this.timeRecordsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.timeRecordsToolStripMenuItem.Text = "...Time Records";
             this.timeRecordsToolStripMenuItem.Click += new System.EventHandler(this.timeRecordsToolStripMenuItem_Click);
+            // 
+            // lbSearchMatches
+            // 
+            this.lbSearchMatches.FormattingEnabled = true;
+            this.lbSearchMatches.Location = new System.Drawing.Point(359, 141);
+            this.lbSearchMatches.Name = "lbSearchMatches";
+            this.lbSearchMatches.Size = new System.Drawing.Size(285, 134);
+            this.lbSearchMatches.TabIndex = 7;
             // 
             // frmMain
             // 
