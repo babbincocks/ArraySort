@@ -164,6 +164,9 @@ namespace ArraySort
                         searchTerm.TrimEnd(',');
                     }
 
+                    //If any names are highlighted from being searched before, they are un-highlighted.
+                    lbNameList.SelectedIndices.Clear();
+
                     //If the name is set up so it'd (assumedly) be in the format "FirstName LastName", this code executes.
                     if (searchTerm.Length > 1 && searchTerm.Contains(" ") && !searchTerm.Contains(","))
                     {
@@ -179,10 +182,11 @@ namespace ArraySort
                             if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) == 0)
                             {
                                 //If there's a match, while loop is broken (with match), program knows that it found a match (with location), the
-                                //matching name is highlighted, and the results are added to the Search Matches list box.
+                                //matching name is highlighted, the results are added to the Search Matches list box, and it's put into a list called
+                                //matches, to be highlighted at the end.
                                 match = true;
                                 location = middle;
-                                lbNameList.SetSelected(middle, true);
+                                matches.Add(splitNames[middle]);
                                 lbSearchMatches.Items.Add("The name " + splitNames[location].ToString(2) + " was found on line " + (location + 1) + ".");
                             }
                             else if (string.Compare(splitNames[middle].ToString(), search.ToString(), true) > 0)
@@ -211,6 +215,7 @@ namespace ArraySort
                             {
                                 match = true;
                                 location = middle;
+                                matches.Add(splitNames[middle]);
                                 lbSearchMatches.Items.Add("The name " + splitNames[location].ToString(2) + " was found on line " + (location + 1) + ".");
                                 lbNameList.SetSelected(middle, true);
 
@@ -244,6 +249,7 @@ namespace ArraySort
 
                                 match = true;
                                 location = start;
+                                matches.Add(splitNames[start]);
                                 lbSearchMatches.Items.Add("The name " + splitNames[start].ToString(2) + " was found on line " + (start + 1) + ".");
 
                             }
@@ -252,13 +258,14 @@ namespace ArraySort
                             {
                                 match = true;
                                 location = start;
+                                matches.Add(splitNames[start]);
                                 lbSearchMatches.Items.Add("The name " + splitNames[start].ToString(2) + " was found on line " + (start + 1) + ".");
 
                             }
 
                         }
-
-
+                        
+                       
                         //This option has the ability to display multiple results, due to using the sequential search method, which is nice.
 
 
@@ -278,6 +285,7 @@ namespace ArraySort
                             {
                                 location = middle;
                                 lbNameList.SetSelected(middle, true);
+                                matches.Add(splitNames[middle]);
                                 lbSearchMatches.Items.Add("The name " + splitNames[location].ToString(2) + " was found on line " + (location + 1) + ".");
                                 match = true;
                             }
@@ -309,6 +317,21 @@ namespace ArraySort
                     if (location == -1)
                     {
                         throw new Exception("Unable to find the search term in the list of names.");
+                    }
+
+                    //This is where the highlighting is done. Going through all of the names for each name in the matches list, so 
+                    //the index of the match can be found and then the name in that index is highlighted.
+                    for (int mIndex = 0; mIndex < matches.Count; mIndex++)
+                    {
+                        string p = matches[mIndex].ToString();
+
+                        for (int index = 0; index < lbNameList.Items.Count; index++)
+                        {
+                            if (p == lbNameList.Items[index].ToString())
+                            {
+                                lbNameList.SetSelected(index, true);
+                            }
+                        }
                     }
 
                     DateTime timeEnd = DateTime.Now;
